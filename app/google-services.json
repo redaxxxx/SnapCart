@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1027680100435",
+    "firebase_url": "https://driver-b82fe-default-rtdb.firebaseio.com",
+    "project_id": "driver-b82fe",
+    "storage_bucket": "driver-b82fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027680100435:android:953703669d4b1f2f0026a6",
+        "android_client_info": {
+          "package_name": "com.android.developer.prof.reda.snapcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027680100435-9or77su7lngvcktf7jlhl0svkjb7l2k6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVTL1CUryWXEXvc582NmxDnDbJhivr6c8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027680100435-9or77su7lngvcktf7jlhl0svkjb7l2k6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
