@@ -22,6 +22,10 @@
     <string name="or_text">or</string>
     <string name="already_have_an_account_text">Already have an account? <font color="#6033ba">Sign in here</font></string>
     <string name="google_icon">Google</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="enter_your_email_text">Enter your email address to get the\npassword reset link</string>
+    <string name="arrow_text">arrow button</string>
+    <string name="password_reset_text">Password Reset</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

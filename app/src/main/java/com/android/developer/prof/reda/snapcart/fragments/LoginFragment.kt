@@ -2,23 +2,26 @@ package com.android.developer.prof.reda.snapcart.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.android.developer.prof.reda.snapcart.R
 import com.android.developer.prof.reda.snapcart.activity.HomeActivity
 import com.android.developer.prof.reda.snapcart.databinding.FragmentLoginBinding
+import com.android.developer.prof.reda.snapcart.util.LoginValidation
 import com.android.developer.prof.reda.snapcart.util.Resource
 import com.android.developer.prof.reda.snapcart.viewModel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
+const val LOGIN_TAG = "LoginFragment"
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -26,7 +29,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentLoginBinding.inflate(
             layoutInflater
@@ -56,6 +59,7 @@ class LoginFragment : Fragment() {
                         binding.loginProgressbar.visibility = View.GONE
                     }
                     is Resource.Failed ->{
+                        Log.d(LOGIN_TAG, it.message.toString())
                         Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_LONG).show()
                         binding.loginProgressbar.visibility = View.GONE
                     }
@@ -64,6 +68,26 @@ class LoginFragment : Fragment() {
             }
         }
 
+        lifecycleScope.launch {
+            viewModel.validation.collectLatest {
+                if (it.email is LoginValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.emailEt.apply {
+                            requestFocus()
+                            error = it.email.message
+                        }
+                    }
+                }
+                if (it.password is LoginValidation.Failed){
+                    withContext(Dispatchers.Main){
+                        binding.passwordEt.apply {
+                            requestFocus()
+                            error = it.password.message
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

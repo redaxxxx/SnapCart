@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineLoginDown"
         app:layout_constraintEnd_toStartOf="@+id/guidelineLoginRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLoginLeft"
