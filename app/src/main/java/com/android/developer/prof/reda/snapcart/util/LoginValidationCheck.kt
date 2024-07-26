@@ -17,5 +17,8 @@ fun validateLoginPassword(password: String): LoginValidation{
     if (password.isEmpty()){
         LoginValidation.Failed("Password cannot be empty")
     }
+    if (password.length < 8){
+        LoginValidation.Failed("Password should contains 8 char")
+    }
     return LoginValidation.Success
 }

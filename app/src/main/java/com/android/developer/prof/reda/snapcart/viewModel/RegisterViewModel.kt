@@ -11,8 +11,7 @@ import com.android.developer.prof.reda.snapcart.util.USER_COLLECTION
 import com.android.developer.prof.reda.snapcart.util.validateRegisterEmail
 import com.android.developer.prof.reda.snapcart.util.validateRegisterMobileNumber
 import com.android.developer.prof.reda.snapcart.util.validateRegisterPassword
-import com.android.developer.prof.reda.snapcart.util.validationRegisterFirstName
-import com.android.developer.prof.reda.snapcart.util.validationRegisterLastName
+import com.android.developer.prof.reda.snapcart.util.validationRegisterUsername
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,8 +51,7 @@ class RegisterViewModel @Inject constructor(
                 }
         }else{
             val registerFailedState = RegisterFailedState(
-                validationRegisterFirstName(user.firstName),
-                validationRegisterLastName(user.lastName),
+                validationRegisterUsername(user.userName),
                 validateRegisterEmail(user.email),
                 validateRegisterMobileNumber(user.mobileNumber),
                 validateRegisterPassword(password)
@@ -78,14 +76,12 @@ class RegisterViewModel @Inject constructor(
             }
     }
     private fun checkValidation(user: User , password: String): Boolean{
-        val firstNameValidation = validationRegisterFirstName(user.firstName)
-        val lastNameValidation = validationRegisterLastName(user.lastName)
+        val firstNameValidation = validationRegisterUsername(user.userName)
         val emailValidation = validateRegisterEmail(user.email)
         val mobileNumberValidation = validateRegisterMobileNumber(user.mobileNumber)
         val passwordValidation = validateRegisterPassword(password)
 
         return firstNameValidation is RegisterValidation.Success &&
-                lastNameValidation is RegisterValidation.Success &&
                 emailValidation is RegisterValidation.Success &&
                 mobileNumberValidation is RegisterValidation.Success &&
                 passwordValidation is RegisterValidation.Success

@@ -1,58 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.LoginRegisterActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        tools:context=".activity.LoginRegisterActivity">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:src="@drawable/intro_logo"
-                android:contentDescription="@string/intro_image" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/intro_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:text="@string/intro_title"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:src="@drawable/intro_logo"
+                    android:contentDescription="@string/intro_image" />
 
-            <TextView
-                android:id="@+id/intro_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:lineSpacingExtra="10dp"
-                android:text="@string/intro_text"
-                android:textColor="@color/grey" />
+                <TextView
+                    android:id="@+id/intro_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/intro_title"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/startButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@android:style/Widget.Button"
-                android:text="@string/let_s_get_started_text"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:layout_margin="24dp"
-                android:background="@drawable/purple_btn_bg"/>
-        </LinearLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/intro_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="10dp"
+                    android:text="@string/intro_text"
+                    android:textColor="@color/grey" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/startButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@android:style/Widget.Button"
+                    android:text="@string/let_s_get_started_text"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:layout_margin="24dp"
+                    android:background="@drawable/purple_btn_bg" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

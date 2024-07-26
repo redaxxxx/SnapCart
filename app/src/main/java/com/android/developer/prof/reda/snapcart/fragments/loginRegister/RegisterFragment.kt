@@ -1,4 +1,4 @@
-package com.android.developer.prof.reda.snapcart.fragments
+package com.android.developer.prof.reda.snapcart.fragments.loginRegister
 
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -31,8 +32,9 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRegisterBinding.inflate(
+        binding = DataBindingUtil.inflate(
             inflater,
+            R.layout.fragment_register,
             container,
             false
         )
@@ -45,10 +47,9 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.createAccountTv.setOnClickListener {
+        binding.signupButton.setOnClickListener {
             val user = User(
                 binding.firstNameEt.text.toString(),
-                binding.lastNameEt.text.toString(),
                 binding.emailRegisterEt.text.toString(),
                 binding.mobileNumberEt.text.toString()
             )
@@ -79,25 +80,16 @@ class RegisterFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.validation.collectLatest {
-                if (it.firstName is RegisterValidation.Failed){
+                if (it.username is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){
                         binding.firstNameEt.apply {
                             requestFocus()
-                            error = it.firstName.message
+                            error = it.username.message
                         }
                     }
                 }
             }
-            viewModel.validation.collectLatest {
-                if (it.lastName is RegisterValidation.Failed){
-                    withContext(Dispatchers.Main){
-                        binding.lastNameEt.apply {
-                            requestFocus()
-                            error = it.lastName.message
-                        }
-                    }
-                }
-            }
+
             viewModel.validation.collectLatest {
                 if (it.email is RegisterValidation.Failed){
                     withContext(Dispatchers.Main){

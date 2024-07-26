@@ -2,17 +2,9 @@ package com.android.developer.prof.reda.snapcart.util
 
 import android.util.Patterns
 
-fun validationRegisterFirstName(firstName: String): RegisterValidation{
+fun validationRegisterUsername(firstName: String): RegisterValidation{
     if (firstName.isEmpty()){
         RegisterValidation.Failed("First Name cannot be empty")
-    }
-
-    return RegisterValidation.Success
-}
-
-fun validationRegisterLastName(lastName: String): RegisterValidation{
-    if (lastName.isEmpty()){
-        RegisterValidation.Failed("Last Name cannot be empty")
     }
 
     return RegisterValidation.Success

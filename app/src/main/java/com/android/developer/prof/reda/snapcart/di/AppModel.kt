@@ -1,5 +1,8 @@
 package com.android.developer.prof.reda.snapcart.di
 
+import android.app.Application
+import android.content.Context.MODE_PRIVATE
+import com.android.developer.prof.reda.snapcart.util.INTRODUCTION_SP
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -7,10 +10,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.assisted.Assisted
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn
+@InstallIn(SingletonComponent::class)
 object AppModel {
 
     @Provides
@@ -20,4 +24,8 @@ object AppModel {
     @Provides
     @Singleton
     fun provideFirestore() = FirebaseFirestore.getInstance()
+
+    @Provides
+    fun provideIntroductionSP(application: Application) =
+        application.getSharedPreferences(INTRODUCTION_SP, MODE_PRIVATE)
 }

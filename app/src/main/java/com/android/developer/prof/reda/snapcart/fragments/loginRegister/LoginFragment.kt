@@ -1,4 +1,4 @@
-package com.android.developer.prof.reda.snapcart.fragments
+package com.android.developer.prof.reda.snapcart.fragments.loginRegister
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.android.developer.prof.reda.snapcart.R
 import com.android.developer.prof.reda.snapcart.activity.HomeActivity
 import com.android.developer.prof.reda.snapcart.databinding.FragmentLoginBinding
 import com.android.developer.prof.reda.snapcart.util.LoginValidation
@@ -31,8 +34,11 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentLoginBinding.inflate(
-            layoutInflater
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_login,
+            container,
+            false
         )
 
         return binding.root
@@ -48,6 +54,14 @@ class LoginFragment : Fragment() {
             viewModel.loginUser(email, password)
         }
 
+        binding.createAccountLoginTv.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        binding.forgotPasswordLoginTv.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_resetPasswordFragment)
+        }
+
         lifecycleScope.launch {
             viewModel.login.collectLatest {
                 when(it){
@@ -56,6 +70,7 @@ class LoginFragment : Fragment() {
                     }
                     is Resource.Success ->{
                         startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                        requireActivity().finish()
                         binding.loginProgressbar.visibility = View.GONE
                     }
                     is Resource.Failed ->{

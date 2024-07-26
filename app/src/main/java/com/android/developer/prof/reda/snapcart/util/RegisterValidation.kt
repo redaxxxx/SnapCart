@@ -5,8 +5,7 @@ sealed class RegisterValidation{
     data class Failed(val message: String): RegisterValidation()
 }
 data class RegisterFailedState(
-    val firstName: RegisterValidation,
-    val lastName: RegisterValidation,
+    val username: RegisterValidation,
     val email: RegisterValidation,
     val mobileNumber: RegisterValidation,
     val password: RegisterValidation
