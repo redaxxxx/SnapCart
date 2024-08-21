@@ -6,6 +6,5 @@
     </style>
 
     <style name="Theme.SnapCart" parent="Base.Theme.SnapCart" >
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 </resources>

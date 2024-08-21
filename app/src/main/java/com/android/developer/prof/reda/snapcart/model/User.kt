@@ -1,4 +1,4 @@
-package com.android.developer.prof.reda.snapcart.data
+package com.android.developer.prof.reda.snapcart.model
 
 data class User(
     val userName: String,

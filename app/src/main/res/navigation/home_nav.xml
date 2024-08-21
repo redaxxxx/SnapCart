@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav"
-    app:startDestination="@id/exploreFragment2">
+    app:startDestination="@id/exploreFragment">
 
     <fragment
-        android:id="@+id/exploreFragment2"
+        android:id="@+id/exploreFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.ExploreFragment"
         android:label="fragment_explore"
         tools:layout="@layout/fragment_explore" />
     <fragment
-        android:id="@+id/cartFragment2"
+        android:id="@+id/cartFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
-        android:id="@+id/favoriteFragment2"
+        android:id="@+id/favoriteFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
-        android:id="@+id/myOrderFragment2"
+        android:id="@+id/myOrderFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.MyOrderFragment"
         android:label="fragment_my_order"
         tools:layout="@layout/fragment_my_order" />
     <fragment
-        android:id="@+id/profileFragment2"
+        android:id="@+id/profileFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />

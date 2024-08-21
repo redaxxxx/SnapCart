@@ -3,7 +3,7 @@ package com.android.developer.prof.reda.snapcart.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.developer.prof.reda.snapcart.data.User
+import com.android.developer.prof.reda.snapcart.model.User
 import com.android.developer.prof.reda.snapcart.util.RegisterFailedState
 import com.android.developer.prof.reda.snapcart.util.RegisterValidation
 import com.android.developer.prof.reda.snapcart.util.Resource

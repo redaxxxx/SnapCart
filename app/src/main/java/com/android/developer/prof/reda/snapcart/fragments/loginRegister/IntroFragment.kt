@@ -36,9 +36,9 @@ class IntroFragment : Fragment() {
            false
        )
 
-//        binding.startButton.setOnClickListener {
-//            findNavController().navigate(R.id.action_introFragment_to_registerFragment)
-//        }
+        binding.startButton.setOnClickListener {
+            findNavController().navigate(R.id.action_introFragment_to_registerFragment)
+        }
 
         return binding.root
     }

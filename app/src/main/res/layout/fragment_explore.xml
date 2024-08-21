@@ -17,6 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toTopOf="@+id/guidelineExploreDown"
             app:layout_constraintEnd_toStartOf="@+id/guidelineExploreRight"
             app:layout_constraintStart_toStartOf="@+id/guidelineExploreLeft"
@@ -28,7 +29,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -55,14 +56,12 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_marginEnd="16dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/bell_icon" />
 
                 <ImageView
                     android:id="@+id/search_btn"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:src="@tools:sample/avatars"
                     app:srcCompat="@drawable/search_icon" />
 
             </LinearLayout>
@@ -130,7 +129,10 @@
                     android:clipToPadding="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/brand_items"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"/>
 
                 <ProgressBar
                     android:id="@+id/progressBarViewBrand"
@@ -179,7 +181,10 @@
                     android:clipToPadding="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    tools:listitem="@layout/recommendation_items"
+                    app:spanCount="2"/>
 
                 <ProgressBar
                     android:id="@+id/progressBarViewPopular"
@@ -213,13 +218,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.02872777" />
+            app:layout_constraintGuide_percent="0.03" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineExploreDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.97127223" />
+            app:layout_constraintGuide_percent="0.97" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

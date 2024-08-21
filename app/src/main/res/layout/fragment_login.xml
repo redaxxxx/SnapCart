@@ -66,7 +66,7 @@
                     android:text="@string/email_address_text"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    tools:layout_marginTop="32dp" />
+                    tools:layout_marginTop="24dp" />
 
                 <EditText
                     android:id="@+id/email_et"
@@ -136,63 +136,6 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp">
-
-                    <com.google.android.material.divider.MaterialDivider
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        app:indicatorColor="@color/grey" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="@string/or_sign_in_with_text"
-                        android:textColor="@color/grey"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.divider.MaterialDivider
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        app:indicatorColor="@color/grey" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/layout_bg"
-                    android:gravity="center"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_google"
-                        android:contentDescription="@string/google_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/continue_with_google_text"
-                        android:textColor="@color/grey"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/createAccount_login_tv"
