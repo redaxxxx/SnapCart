@@ -122,6 +122,10 @@ dependencies {
     // ...with Java.
     testAnnotationProcessor("com.google.dagger:hilt-android-compiler:2.44")
 
+    //gson
+    implementation ("com.google.code.gson:gson:2.11.0")
+
+
 }
 kapt{
     correctErrorTypes = true

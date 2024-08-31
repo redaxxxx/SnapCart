@@ -9,7 +9,11 @@
         android:id="@+id/exploreFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.ExploreFragment"
         android:label="fragment_explore"
-        tools:layout="@layout/fragment_explore" />
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_exploreFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.CartFragment"
@@ -30,4 +34,13 @@
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.android.developer.prof.reda.snapcart.fragments.home.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="item"
+            app:argType="com.android.developer.prof.reda.snapcart.model.PopularItemModel" />
+    </fragment>
 </navigation>

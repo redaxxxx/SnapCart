@@ -20,6 +20,10 @@ class PopularItemAdapter : ListAdapter<PopularItemModel, PopularItemAdapter.Popu
             binding.titleTv.text = item.title
             binding.priceTv.text = item.price.toString()
             binding.ratingTv.text = item.rating.toString()
+
+            itemView.setOnClickListener {
+                onItemClick?.invoke(item)
+            }
         }
     }
 
@@ -51,4 +55,6 @@ class PopularItemAdapter : ListAdapter<PopularItemModel, PopularItemAdapter.Popu
         val popularItem = getItem(position)
         holder.bind(popularItem)
     }
+
+    var onItemClick: ((PopularItemModel) -> Unit)? = null
 }
