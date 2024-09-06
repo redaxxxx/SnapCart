@@ -2,6 +2,7 @@ package com.android.developer.prof.reda.snapcart.di
 
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
+import com.android.developer.prof.reda.snapcart.firebase.FirebaseCommon
 import com.android.developer.prof.reda.snapcart.util.INTRODUCTION_SP
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -38,4 +39,11 @@ object AppModel {
     @Provides
     @Singleton
     fun provideFirebaseStorage() = Firebase.storage.reference
+
+    @Provides
+    @Singleton
+    fun provideFirebaseCommon(
+        firestore: FirebaseFirestore,
+        auth: FirebaseAuth
+    ) = FirebaseCommon(auth, firestore)
 }

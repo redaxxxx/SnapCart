@@ -2,6 +2,7 @@ package com.android.developer.prof.reda.snapcart.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.developer.prof.reda.snapcart.firebase.FirebaseCommon
 import com.android.developer.prof.reda.snapcart.model.PopularItemModel
 import com.android.developer.prof.reda.snapcart.model.CartProduct
 import com.android.developer.prof.reda.snapcart.util.Resource
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val firestore: FirebaseFirestore,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val firebaseCommon: FirebaseCommon
 ) : ViewModel(){
 
     private val _addToCart = MutableStateFlow<Resource<CartProduct>>(Resource.Unspecified())
@@ -26,15 +28,26 @@ class DetailViewModel @Inject constructor(
         .collection("cart")
 
     fun addNewProduct(cartProduct: CartProduct){
-        cartCollection.document().set(cartProduct)
-            .addOnSuccessListener {
-                viewModelScope.launch {
-                    _addToCart.emit(Resource.Success(cartProduct))
-                }
-            }.addOnFailureListener {
-                viewModelScope.launch {
-                    _addToCart.emit(Resource.Failed(it.message.toString()))
+        firebaseCommon.addNewProduct(cartProduct){addedproduct, exception->
+            viewModelScope.launch {
+                if (exception != null){
+                    _addToCart.emit(Resource.Failed(exception.message.toString()))
+                }else{
+                    _addToCart.emit(Resource.Success(addedproduct!!))
                 }
             }
+        }
+    }
+
+    private fun increaseQuantity(documentId: String, cartProduct: CartProduct){
+        firebaseCommon.increaseQuantityProduct(documentId){_,exception ->
+            viewModelScope.launch {
+                if (exception != null){
+                    _addToCart.emit(Resource.Failed(exception.message.toString()))
+                }else{
+                    _addToCart.emit(Resource.Success(cartProduct))
+                }
+            }
+        }
     }
 }

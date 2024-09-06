@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.android.developer.prof.reda.snapcart.R
 import com.android.developer.prof.reda.snapcart.databinding.ActivityHomeBinding
 import com.android.developer.prof.reda.snapcart.util.Resource
+import com.android.developer.prof.reda.snapcart.viewModel.CartViewModel
 import com.android.developer.prof.reda.snapcart.viewModel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
-    private val detailViewModel by viewModels<DetailViewModel>()
+    private val cartViewModel by viewModels<CartViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,14 +35,28 @@ class HomeActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{_,destination,_ ->
-            if (destination.id == R.id.detailFragment){
+            if (destination.id == R.id.detailFragment || destination.id == R.id.cartFragment){
                 binding.bottomNavigationView.visibility = View.GONE
+            }
+            else{
+                binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }
 
         // view badge  cart icon for number of products in cart
         lifecycleScope.launch {
-
+            cartViewModel.cartProducts.collectLatest {
+                when(it){
+                    is Resource.Success ->{
+                        val count = it.data?.size ?: 0
+                        binding.bottomNavigationView.getOrCreateBadge(R.id.cartFragment).apply {
+                            number = count
+                            backgroundColor = resources.getColor(R.color.white)
+                        }
+                    }
+                    else -> Unit
+                }
+            }
         }
     }
 }
