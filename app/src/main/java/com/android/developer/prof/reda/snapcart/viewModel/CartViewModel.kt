@@ -3,8 +3,11 @@ package com.android.developer.prof.reda.snapcart.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.developer.prof.reda.snapcart.firebase.FirebaseCommon
+import com.android.developer.prof.reda.snapcart.helper.getTax
 import com.android.developer.prof.reda.snapcart.model.CartProduct
+import com.android.developer.prof.reda.snapcart.util.CART_COLLECTION
 import com.android.developer.prof.reda.snapcart.util.Resource
+import com.android.developer.prof.reda.snapcart.util.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -13,6 +16,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,8 +44,8 @@ class CartViewModel @Inject constructor(
         viewModelScope.launch {
             _cartProducts.emit(Resource.Loading())
         }
-        firestore.collection("user").document(auth.uid!!)
-            .collection("cart")
+        firestore.collection(USER_COLLECTION).document(auth.uid!!)
+            .collection(CART_COLLECTION)
             .addSnapshotListener{value, error->
                 if (error != null && value == null){
                     viewModelScope.launch {
@@ -123,5 +127,45 @@ class CartViewModel @Inject constructor(
         }
     }
 
+    val productsPrice = cartProducts.map {
+        when(it){
+            is Resource.Success -> {
+                calculateTotalPrice(it.data!!)
+            }
+            else -> null
+        }
+    }
+
+    val tax = cartProducts.map {
+        when(it){
+            is Resource.Success ->{
+                calculateTax(it.data!!)
+            }
+            else -> null
+        }
+    }
+
+    val subTotal = cartProducts.map {
+        when(it){
+            is Resource.Success ->{
+                it.data?.sumByDouble {cartProduct ->
+                    cartProduct.popularItemModel.price * cartProduct.quantity
+                }
+            }
+            else -> null
+        }
+    }
+
+    private fun calculateTax(data: List<CartProduct>): Double{
+        return data.sumByDouble {cartProduct ->
+            cartProduct.popularItemModel.price.getTax(cartProduct.popularItemModel.price * cartProduct.quantity)
+        }.toDouble()
+    }
+    private fun calculateTotalPrice(data: List<CartProduct>): Double{
+        return data.sumByDouble {cartProduct ->
+            cartProduct.popularItemModel.price.getTax(cartProduct.popularItemModel.price * cartProduct.quantity) +
+                    (cartProduct.popularItemModel.price * cartProduct.quantity)
+        }.toDouble()
+    }
 
 }

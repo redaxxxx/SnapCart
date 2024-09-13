@@ -1,6 +1,8 @@
 package com.android.developer.prof.reda.snapcart.firebase
 
 import com.android.developer.prof.reda.snapcart.model.CartProduct
+import com.android.developer.prof.reda.snapcart.util.CART_COLLECTION
+import com.android.developer.prof.reda.snapcart.util.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -8,8 +10,8 @@ class FirebaseCommon(
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
 ) {
-    private val cartCollection = firestore.collection("user").document(auth.uid!!)
-        .collection("cart")
+    private val cartCollection = firestore.collection(USER_COLLECTION).document(auth.uid!!)
+        .collection(CART_COLLECTION)
 
 
     fun addNewProduct(cartProduct: CartProduct, onResult: (CartProduct?, Exception?) -> Unit){

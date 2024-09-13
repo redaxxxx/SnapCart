@@ -48,10 +48,12 @@ class HomeActivity : AppCompatActivity() {
             cartViewModel.cartProducts.collectLatest {
                 when(it){
                     is Resource.Success ->{
-                        val count = it.data?.size ?: 0
-                        binding.bottomNavigationView.getOrCreateBadge(R.id.cartFragment).apply {
-                            number = count
-                            backgroundColor = resources.getColor(R.color.white)
+                        val count = it.data?.size
+                        if (count != null){
+                            binding.bottomNavigationView.getOrCreateBadge(R.id.cartFragment).apply {
+                                number = count
+                                backgroundColor = resources.getColor(R.color.white)
+                            }
                         }
                     }
                     else -> Unit

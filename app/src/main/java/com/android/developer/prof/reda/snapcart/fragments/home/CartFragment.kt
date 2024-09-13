@@ -15,6 +15,8 @@ import com.android.developer.prof.reda.snapcart.R
 import com.android.developer.prof.reda.snapcart.adapters.CartAdapter
 import com.android.developer.prof.reda.snapcart.databinding.FragmentCartBinding
 import com.android.developer.prof.reda.snapcart.firebase.FirebaseCommon
+import com.android.developer.prof.reda.snapcart.helper.getTax
+import com.android.developer.prof.reda.snapcart.model.CartProduct
 import com.android.developer.prof.reda.snapcart.util.Resource
 import com.android.developer.prof.reda.snapcart.viewModel.CartViewModel
 import com.google.firebase.Firebase
@@ -27,6 +29,11 @@ class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
     private val cartViewModel by viewModels<CartViewModel>()
     private val adapter by lazy { CartAdapter() }
+
+    private var totalPrice: Double = 0.0
+    private var totalTax : Double = 0.0
+    private var subTotalPrice: Double = 0.0
+    private var products = emptyList<CartProduct>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +51,15 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.checkOutBtn.setOnClickListener {
+            findNavController().navigate(CartFragmentDirections.actionCartFragmentToCheckoutFragment(
+                products.toTypedArray(),
+                totalPrice.toFloat(),
+                subTotalPrice.toFloat(),
+                totalTax.toFloat()
+            ))
+        }
+
         binding.backBtnCart.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -57,6 +73,39 @@ class CartFragment : Fragment() {
         adapter.onClickMinus = {cartProduct ->
             cartViewModel.quantityChanging(cartProduct, FirebaseCommon.QuantityChanging.DECREASE)
         }
+
+        lifecycleScope.launch {
+            cartViewModel.productsPrice.collectLatest {price->
+                price.let {
+                    if (it != null) {
+                        binding.total.text = "$${it + 10}"
+                        totalPrice = it
+                    }
+                }
+
+            }
+        }
+
+        lifecycleScope.launch {
+            cartViewModel.tax.collectLatest {tax->
+                tax.let {
+                    binding.totalTax.text = "$$it"
+                    if (it != null){
+                        totalTax = it
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            cartViewModel.subTotal.collectLatest { subTotal ->
+                subTotal?.let {
+                    binding.subtotal.text = "$$it"
+                    subTotalPrice = subTotal
+                }
+            }
+        }
+
 
         //fetch cart products from firebase firestore
         lifecycleScope.launch {

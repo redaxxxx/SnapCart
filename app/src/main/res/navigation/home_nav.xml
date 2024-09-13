@@ -18,7 +18,11 @@
         android:id="@+id/cartFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.android.developer.prof.reda.snapcart.fragments.home.FavoriteFragment"
@@ -42,5 +46,41 @@
         <argument
             android:name="item"
             app:argType="com.android.developer.prof.reda.snapcart.model.PopularItemModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.android.developer.prof.reda.snapcart.fragments.home.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" >
+        <argument
+            android:name="products"
+            app:argType="com.android.developer.prof.reda.snapcart.model.CartProduct[]" />
+        <argument android:name="totalPrice"
+            app:argType="float" />
+        <argument
+            android:name="subTotal"
+            app:argType="float" />
+        <argument
+            android:name="tax"
+            app:argType="float" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_shippingAddressFragment"
+            app:destination="@id/shippingAddressFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addShippingAddressFragment"
+        android:name="com.android.developer.prof.reda.snapcart.fragments.home.AddShippingAddressFragment"
+        android:label="fragment_add_shipping_address"
+        tools:layout="@layout/fragment_add_shipping_address" />
+
+    <fragment
+        android:id="@+id/shippingAddressFragment"
+        android:name="com.android.developer.prof.reda.snapcart.fragments.home.ShippingAddressFragment"
+        android:label="ShippingAddressFragment"
+        tools:layout="@layout/fragment_shipping_address">
+        <action
+            android:id="@+id/action_shippingAddressFragment_to_addShippingAddressFragment"
+            app:destination="@id/addShippingAddressFragment" />
     </fragment>
 </navigation>
