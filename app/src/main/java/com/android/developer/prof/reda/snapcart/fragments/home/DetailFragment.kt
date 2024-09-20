@@ -58,7 +58,7 @@ class DetailFragment : Fragment() {
         item = DetailFragmentArgs.fromBundle(requireArguments()).item
 
         binding.detailTitleTv.text = item.title
-        binding.detailPriceTv.text = item.price.toString()
+        binding.detailPriceTv.text = "$${item.price}"
         binding.detailRatingTv.text = item.rating.toString()
         binding.descriptionTv.text = item.description
 
