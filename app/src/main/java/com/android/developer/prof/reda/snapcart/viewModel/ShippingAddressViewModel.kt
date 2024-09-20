@@ -1,19 +1,20 @@
 package com.android.developer.prof.reda.snapcart.viewModel
 
-import android.location.Address
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.developer.prof.reda.snapcart.model.Address
 import com.android.developer.prof.reda.snapcart.util.ADDRESS_COLLECTION
 import com.android.developer.prof.reda.snapcart.util.Resource
 import com.android.developer.prof.reda.snapcart.util.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+@HiltViewModel
 class ShippingAddressViewModel @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val auth: FirebaseAuth

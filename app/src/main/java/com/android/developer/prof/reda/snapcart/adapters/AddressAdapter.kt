@@ -22,7 +22,9 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.AddressViewHolder>(Di
                 countryTv.text = address.country
 
                 //what happen when chick box is checked
-
+                checkbox.setOnClickListener {
+                    onCheckboxClick?.invoke(address)
+                }
             }
         }
     }
@@ -50,4 +52,6 @@ class AddressAdapter : ListAdapter<Address, AddressAdapter.AddressViewHolder>(Di
         val address = getItem(position)
         holder.bind(address)
     }
+
+    var onCheckboxClick: ((Address) -> Unit)? = null
 }

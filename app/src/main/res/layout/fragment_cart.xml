@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.home.CartFragment">
+        tools:context=".fragments.home.CartFragment"
+        android:background="@color/white">
 
         <ProgressBar
             android:id="@+id/progressBar_cart"
@@ -234,7 +235,8 @@
                     android:layout_height="match_parent"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:orientation="vertical"
-                    tools:listitem="@layout/cart_item" />
+                    tools:listitem="@layout/cart_item"
+                    android:layout_marginTop="24dp"/>
             </LinearLayout>
         </ScrollView>
 

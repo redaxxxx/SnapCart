@@ -16,10 +16,12 @@ import com.android.developer.prof.reda.snapcart.databinding.FragmentShippingAddr
 import com.android.developer.prof.reda.snapcart.model.Address
 import com.android.developer.prof.reda.snapcart.util.Resource
 import com.android.developer.prof.reda.snapcart.viewModel.AddAddressViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 const val ADD_ADDRESS_TAG: String = "AddShippingAddressFragment"
+@AndroidEntryPoint
 class AddShippingAddressFragment : Fragment() {
     private lateinit var binding: FragmentAddShippingAddressBinding
     private val addNewAddressViewModel by viewModels<AddAddressViewModel>()
@@ -40,6 +42,10 @@ class AddShippingAddressFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.backBtnAddAddress.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         binding.apply {
             saveAddressBtn.setOnClickListener {

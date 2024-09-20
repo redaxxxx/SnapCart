@@ -35,7 +35,9 @@ class HomeActivity : AppCompatActivity() {
         binding.bottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{_,destination,_ ->
-            if (destination.id == R.id.detailFragment || destination.id == R.id.cartFragment){
+            if (destination.id == R.id.detailFragment || destination.id == R.id.checkoutFragment ||
+                destination.id == R.id.shippingAddressFragment || destination.id == R.id.addShippingAddressFragment||
+                destination.id == R.id.cartFragment){
                 binding.bottomNavigationView.visibility = View.GONE
             }
             else{

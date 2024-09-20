@@ -82,7 +82,6 @@ class CartFragment : Fragment() {
                         totalPrice = it
                     }
                 }
-
             }
         }
 

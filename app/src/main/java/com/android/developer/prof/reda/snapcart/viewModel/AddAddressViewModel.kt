@@ -16,6 +16,7 @@ import com.android.developer.prof.reda.snapcart.util.validationState
 import com.android.developer.prof.reda.snapcart.util.validationZipCode
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +24,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
-
+@HiltViewModel
 class AddAddressViewModel @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val auth: FirebaseAuth
